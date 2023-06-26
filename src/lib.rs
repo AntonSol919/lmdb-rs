@@ -1,8 +1,6 @@
 //! Idiomatic and safe APIs for interacting with the
 //! [Lightning Memory-mapped Database (LMDB)](https://symas.com/lmdb).
 
-#![deny(missing_docs)]
-
 extern crate byteorder;
 extern crate libc;
 extern crate lmdb_sys as ffi;
@@ -13,7 +11,6 @@ extern crate tempdir;
 extern crate bitflags;
 
 pub use cursor::{
-    Cursor,
     Iter,
     IterDup,
     RoCursor,
@@ -29,6 +26,7 @@ pub use environment::{
 pub use error::{
     Error,
     Result,
+    lmdb_result
 };
 pub use flags::*;
 pub use transaction::{
