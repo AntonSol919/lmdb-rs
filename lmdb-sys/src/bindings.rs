@@ -175,6 +175,7 @@ pub const MDB_PREV_MULTIPLE: MDB_cursor_op = 18;
 pub type MDB_cursor_op = u32;
 #[doc = " @brief Statistics for a database in the environment"]
 #[repr(C)]
+#[derive(Debug)]
 pub struct MDB_stat {
     #[doc = "< Size of a database page."]
     #[doc = "This is currently the same for all databases."]
@@ -192,6 +193,7 @@ pub struct MDB_stat {
 }
 #[doc = " @brief Information about the environment"]
 #[repr(C)]
+#[derive(Debug)]
 pub struct MDB_envinfo {
     #[doc = "< Address of map, if fixed"]
     pub me_mapaddr: *mut ::libc::c_void,
