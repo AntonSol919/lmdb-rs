@@ -24,8 +24,10 @@ use ffi;
 use flags::WriteFlags;
 use transaction::Transaction;
 
-impl<'txn> RoCursor<'txn>{
-    pub fn cursor(&self) -> *mut ffi::MDB_cursor{self.cursor}
+impl<'txn> RoCursor<'txn> {
+    pub fn cursor(&self) -> *mut ffi::MDB_cursor {
+        self.cursor
+    }
 
     /// Retrieves a key/data pair from the cursor. Depending on the cursor op,
     /// the current key may be returned.
@@ -130,7 +132,6 @@ pub struct RoCursor<'txn> {
     _marker: PhantomData<fn() -> &'txn ()>,
 }
 
-
 impl<'txn> fmt::Debug for RoCursor<'txn> {
     fn fmt(&self, f: &mut fmt::Formatter) -> result::Result<(), fmt::Error> {
         f.debug_struct("RoCursor").finish()
@@ -168,8 +169,8 @@ pub struct RwCursor<'txn> {
 }
 
 impl<'txn> RwCursor<'txn> {
-    pub fn ro(&self) -> &RoCursor{
-        unsafe {&* (self as &RwCursor as *const RwCursor as *const RoCursor)}
+    pub fn ro(&self) -> &RoCursor {
+        unsafe { &*(self as &RwCursor as *const RwCursor as *const RoCursor) }
     }
 }
 
@@ -275,7 +276,7 @@ pub enum Iter<'txn> {
 
 impl<'txn> Iter<'txn> {
     /// Creates a new iterator backed by the given cursor.
-    fn new(cursor: RoCursor<'txn>, op: c_uint, next_op: c_uint) -> Iter {
+    fn new(cursor: RoCursor<'txn>, op: c_uint, next_op: c_uint) -> Iter<'txn> {
         Iter::Ok {
             cursor,
             op,
@@ -363,7 +364,6 @@ impl<'txn> fmt::Debug for IterDup<'txn> {
         f.debug_struct("IterDup").finish()
     }
 }
-
 
 #[cfg(test)]
 mod test {

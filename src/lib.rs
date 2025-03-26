@@ -24,9 +24,9 @@ pub use environment::{
     Stat,
 };
 pub use error::{
+    lmdb_result,
     Error,
     Result,
-    lmdb_result
 };
 pub use flags::*;
 pub use transaction::{

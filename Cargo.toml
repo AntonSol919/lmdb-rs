@@ -33,7 +33,7 @@ members = [
 ]
 
 [dependencies]
-bitflags = "1"
+bitflags = "2"
 byteorder = "1"
 libc = "0.2"
 
